@@ -1,6 +1,12 @@
 {
- "name": "BONY-XMD-GO-V2",
- "description": "BONY XMD BOT",
- "stack": "heroku-22",
- "keywords": ["bot", "whatsapp", "baileys"]
+  "name": "BONY-XMD-GO-V2",
+  "description": "BONY XMD Bot",
+  "stack": "heroku-22",
+  "keywords": ["whatsapp", "bot", "baileys"],
+  "buildpacks": [{ "url": "heroku/nodejs" }],
+  "env": {
+    "SESSION_ID": { "description": "Your base64 session", "required": true },
+    "PREFIX": { "description": "Bot prefix", "value": "." },
+    "OWNER_NUMBER": { "description": "Owner number", "value": "2547xxxxxxx" }
+  }
 }

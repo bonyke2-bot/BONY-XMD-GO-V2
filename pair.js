@@ -1,25 +1,26 @@
 const { default: makeWASocket, useMultiFileAuthState } = require('@whiskeysockets/baileys')
-const P = require('pino')
-const readline = require('readline')
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
-const ask = (t) => new Promise(r => rl.question(t, r))
-async function gen() {
- const { state, saveCreds } = await useMultiFileAuthState('session')
- const sock = makeWASocket({ auth: state, logger: P({level:'silent'}), browser: ["Ubuntu","Chrome","20.0"] })
- sock.ev.on('creds.update', saveCreds)
- await new Promise(r=>setTimeout(r,3000))
- console.log("\n--- BONY-XMD PAIR GENERATOR ---")
- let num = await ask("Enter number with country code (245...): ")
- num = num.replace(/[^0-9]/g,'')
- if(!num) { console.log("Invalid number"); process.exit() }
- try {
-   const code = await sock.requestPairingCode(num)
-   console.log("\n=================================")
-   console.log(" YOUR CODE: " + code)
-   console.log("=================================")
-   console.log("\n1. WhatsApp > Linked Devices")
-   console.log("2. Link with phone number")
-   console.log("3. Enter: " + code)
- } catch(e){ console.log("Error:", e.message, "\nMake sure number has WhatsApp and not already linked") }
+const pino = require('pino')
+const fs = require('fs')
+async function pair() {
+  const { state, saveCreds } = await useMultiFileAuthState('./session')
+  const sock = makeWASocket({ auth: state, logger: pino({ level: 'silent' }), browser: ['Chrome','Chrome','1.0'], printQRInTerminal: false })
+  sock.ev.on('creds.update', saveCreds)
+  if(!fs.existsSync('./session/creds.json')) {
+    console.log('Enter your number with country code, e.g 2547xxxx:')
+    process.stdin.on('data', async (d) => {
+      const num = d.toString().trim().replace(/[^0-9]/g,'')
+      if(num) {
+        setTimeout(async () => {
+          const code = await sock.requestPairingCode(num)
+          console.log('\n🔥 YOUR PAIR CODE:', code, '\nGo to WhatsApp > Linked Devices > Link with code')
+        }, 2000)
+      }
+    })
+  } else {
+    console.log('Already linked! creds.json exists')
+  }
+  sock.ev.on('connection.update', (u) => {
+    if(u.connection === 'open') console.log('✅ Linked success! Now run: cat session/creds.json | base64 -w 0')
+  })
 }
-gen()
+pair()
