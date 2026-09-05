@@ -9,6 +9,8 @@ module.exports = {
   STICKER_PACK: "BONY-XMD GO V2",
   STICKER_AUTHOR: "Bonyke Tech™",
   WATERMARK: "BONY-XMD-GO-V2",
-  BOT_IMAGE: "https://i.ibb.co/YOUR-IMAGE-LINK.jpg",
-  MENU_IMAGE: "https://i.ibb.co/YOUR-IMAGE-LINK.jpg"
+  BOT_IMAGE: "https://files.catbox.moe/2f6e3y.jpg",
+  MENU_IMAGE: "https://files.catbox.moe/2f6e3y.jpg",
+  GROUP_LINK: "https://chat.whatsapp.com/BEr0VScxfRDB82TSdo3EWT",
+  CHANNEL_LINK: "https://whatsapp.com/channel/0029Vb8coEnKAwEcRBDDnq0Z"
 }
