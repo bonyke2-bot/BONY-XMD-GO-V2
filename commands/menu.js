@@ -1,27 +1,30 @@
 module.exports = {
  name: "menu",
- desc: "Show all commands",
+ desc: "Show menu",
  async exec(m, sock) {
-   const menu = `
-╭─── *BONY-XMD V2* ───
-│ 👑 Owner: Bonyke
-│ ⚡ Version: 2.0
-│ 📍 Prefix: .
-╰────────────────
+  const cmds = `
+*╭─── BONY-XMD-GO-V2 ───*
+*│* Owner: 254748339103
+*│* Commands: 33
+*│* Version: GO V2
+*╰────────────────*
 
-╭─── *MAIN* ───
-│ .ping - speed
-│ .menu - this list
-│ .alive - bot status
-│ .owner - owner contact
-╰────────────
+*GROUP:*
+.tagall, .hidetag, .kick, .promote, .demote, .link, .revoke, .open, .close, .group, .warn
 
-╭─── *TOOLS* ───
-│ .sticker - image to sticker
-│ .play - download song
-│ .ai - ask ai
-╰────────────
-`
-   await sock.sendMessage(m.chat, {text: menu})
+*DOWNLOAD:*
+.tiktok, .fb, .instagram, .play, .ytdl
+
+*TOOLS:*
+.sticker, .toaudio, .viewonce, .del, .status, .ping, .alive
+
+*AI & EXTRA:*
+.ai, .chatbot, .antilink, .welcome, .goodbye, .antidelete, .block, .unblock
+
+*OWNER:*
+.owner
+
+_Type .menu for help_`
+  await sock.sendMessage(m.chat, {text: cmds})
  }
 }
