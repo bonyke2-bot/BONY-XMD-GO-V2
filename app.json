@@ -1,0 +1,6 @@
+{
+ "name": "BONY-XMD-GO-V2",
+ "description": "BONY XMD BOT",
+ "stack": "heroku-22",
+ "keywords": ["bot", "whatsapp", "baileys"]
+}
