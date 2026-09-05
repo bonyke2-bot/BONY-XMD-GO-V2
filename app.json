@@ -1,0 +1,49 @@
+{
+  "name": "BONY-XMD-GO-V2",
+  "description": "BONY-XMD GO V2 by Bonyke Tech - Powerful WhatsApp bot built with nodejs to make your WhatsApp enjoyable",
+  "keywords": [
+    "bot",
+    "whatsapp",
+    "BONY-XMD",
+    "BONY-XMD-GO-V2",
+    "bonyke-tech",
+    "whatsapp-stickers",
+    "anime",
+    "whatsapp-bot",
+    "whatsapp-sticker-bot",
+    "baileys",
+    "baileys-md",
+    "xmd-bot"
+  ],
+  "website": "https://github.com/bonyke2-bot/BONY-XMD-GO-V2#readme",
+  "repository": "https://github.com/bonyke2-bot/BONY-XMD-GO-V2.git",
+  "logo": "https://files.catbox.moe/bkuj17.jpg",
+  "success_url": "/",
+  "env": {
+    "SESSION": {
+      "description": "Add your BONY-XMD session id here",
+      "required": true
+    },
+    "OWNER_NUMBER": {
+      "description": "Put your phone number without + or spaces. Ex: 2547XXXXXXXX",
+      "required": true
+    },
+    "DEVICE_MODE": {
+      "description": "Device mode: iPhone (plain text) or Android (full features)",
+      "value": "Android",
+      "required": true
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql:essential-0",
+      "as": "DATABASE"
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+    }
+  ],
+  "stack": "heroku-24"
+}
