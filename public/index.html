@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BONY XMD | Pairing Hub</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #050505;
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  width: 92%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* NAVBAR */
+
+.navbar {
+  padding: 22px 0;
+  border-bottom: 1px solid #151515;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.brand img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.online {
+  font-size: 13px;
+  color: #5cff91;
+  font-weight: bold;
+}
+
+/* HERO */
+
+.hero {
+  text-align: center;
+  padding: 75px 0 55px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 7px 15px;
+  border: 1px solid #222;
+  border-radius: 30px;
+  color: #aaa;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(42px, 8vw, 78px);
+  line-height: 1;
+  margin-bottom: 22px;
+}
+
+.hero h1 span {
+  color: #777;
+}
+
+.hero p {
+  max-width: 650px;
+  margin: auto;
+  color: #999;
+  font-size: 16px;
+}
+
+.buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-weight: bold;
+  border: 1px solid #292929;
+  transition: .2s;
+}
+
+.btn-primary {
+  background: #ffffff;
+  color: #000;
+}
+
+.btn-secondary {
+  background: #101010;
+  color: #fff;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+/* PILLS */
+
+.pills {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 25px 0 45px;
+}
+
+.pill {
+  padding: 9px 15px;
+  border-radius: 30px;
+  background: #0d0d0d;
+  border: 1px solid #1d1d1d;
+  color: #aaa;
+  font-size: 13px;
+}
+
+/* HERO IMAGE */
+
+.hero-image {
+  max-width: 800px;
+  margin: auto;
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: 24px;
+  display: block;
+  border: 1px solid #202020;
+}
+
+/* SECTION */
+
+section {
+  padding: 65px 0;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.section-title h2 {
+  font-size: 34px;
+  margin-bottom: 8px;
+}
+
+.section-title p {
+  color: #777;
+}
+
+/* STATS */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.stat {
+  background: #0b0b0b;
+  border: 1px solid #1b1b1b;
+  padding: 25px;
+  border-radius: 18px;
+  text-align: center;
+}
+
+.stat h3 {
+  font-size: 30px;
+}
+
+.stat p {
+  color: #777;
+  font-size: 13px;
+}
+
+/* LAUNCHPAD */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.card {
+  background: #0b0b0b;
+  border: 1px solid #1b1b1b;
+  padding: 25px;
+  border-radius: 18px;
+  transition: .2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #333;
+}
+
+.card-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  margin-bottom: 5px;
+}
+
+.card p {
+  color: #777;
+  font-size: 14px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding-top: 55px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="container nav">
+
+    <div class="brand">
+      <img src="https://files.catbox.moe/ruhh71.jpg">
+      <span>BONY XMD</span>
+    </div>
+
+    <div class="online">● ONLINE</div>
+
+  </div>
+</nav>
+
+<main>
+
+<section class="hero">
+
+  <div class="container">
+
+    <div class="badge">BONY XMD PAIRING HUB</div>
+
+    <h1>
+      Connect with <span>BONY XMD.</span>
+    </h1>
+
+    <p>
+      Pair your WhatsApp device with BONY XMD quickly and securely.
+      Generate your session and get your bot online.
+    </p>
+
+    <div class="buttons">
+
+      <a
+        class="btn btn-primary"
+        href="https://demon-sension-1.onrender.com"
+        target="_blank">
+        🔗 Pair a Device
+      </a>
+
+      <a
+        class="btn btn-secondary"
+        href="https://demon-sension-1.onrender.com"
+        target="_blank">
+        ▣ Use QR Code
+      </a>
+
+    </div>
+
+    <div class="pills">
+
+      <div class="pill">01 Simple flow</div>
+      <div class="pill">24/7 Always ready</div>
+      <div class="pill">🔒 Secure Session first</div>
+
+    </div>
+
+    <div class="hero-image">
+      <img src="https://files.catbox.moe/ruhh71.jpg">
+    </div>
+
+  </div>
+
+</section><section>
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Live Today</h2>
+      <p>Real-time activity from the BONY XMD pairing hub.</p>
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+        <h3 id="visitors">0</h3>
+        <p>Real visitors today</p>
+      </div>
+
+      <div class="stat">
+        <h3 id="linked">0</h3>
+        <p>Successfully linked</p>
+      </div>
+
+      <div class="stat">
+        <h3 id="failed">0</h3>
+        <p>Unsuccessful attempts</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Launchpad</h2>
+      <p>Everything you need to get started.</p>
+    </div>
+
+    <div class="cards">
+
+      <a class="card" href="https://demon-sension-1.onrender.com" target="_blank">
+        <div class="card-icon">🔗</div>
+        <h3>Pair Code</h3>
+        <p>Generate your WhatsApp pairing code.</p>
+      </a>
+
+      <a class="card" href="https://demon-sension-1.onrender.com" target="_blank">
+        <div class="card-icon">▣</div>
+        <h3>QR Code</h3>
+        <p>Open the session generator to connect your device.</p>
+      </a>
+
+      <a class="card" href="https://wa.me/254748339103" target="_blank">
+        <div class="card-icon">💬</div>
+        <h3>Contact Owner</h3>
+        <p>Chat directly with BONY KE.</p>
+      </a>
+
+      <a class="card" href="https://github.com/bonyke2-bot/BONY-XMD-GO-V2" target="_blank">
+        <div class="card-icon">💻</div>
+        <h3>Repository</h3>
+        <p>View the BONY XMD source code on GitHub.</p>
+      </a>
+
+      <a class="card" href="https://chat.whatsapp.com/BEr0VScxfRDB82TSdo3EWT?s=cl&p=a&mlu=4&ilr=4" target="_blank">
+        <div class="card-icon">👥</div>
+        <h3>Support Group</h3>
+        <p>Join the BONY XMD WhatsApp community.</p>
+      </a>
+
+      <a class="card" href="https://whatsapp.com/channel/0029Vb8coEnKAwEcRBDDnq0Z" target="_blank">
+        <div class="card-icon">📢</div>
+        <h3>WhatsApp Channel</h3>
+        <p>Follow BONY XMD for updates and announcements.</p>
+      </a>
+
+    </div>
+
+  </div>
+</section><section>
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Community Feedback</h2>
+      <p>Share your experience with BONY 
+XMD.</p>
+    </div>
+
+    <div class="feedback-box">
+
+      <form id="feedbackForm">
+
+        <input
+          id="feedbackName"
+          type="text"
+          placeholder="Your name"
+          maxlength="30"
+          required
+        >
+
+        <input
+          id="feedbackMessage"
+          type="text"
+          placeholder="Write your feedback..."
+          maxlength="150"
+          required
+        >
+
+        <button class="btn btn-primary" 
+type="submit">
+          Send Feedback
+        </button>
+
+      </form>
+
+      <div id="feedbackList"></div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Community Notes</h2>
+      <p>Important information from BONY 
+XMD.</p>
+    </div>
+
+    <div class="notes">
+
+      <div class="note">
+        <strong>🔐 Keep your session 
+private</strong>
+        <p>Never share your SESSION_ID or 
+WhatsApp pairing information with anyone.</p>
+      </div>
+
+      <div class="note">
+        <strong>⚡ Keep your bot 
+active</strong>
+        <p>Make sure your deployment is 
+running correctly before using the bot.</p>
+      </div>
+
+      <div class="note">
+        <strong>🛠️ Need help?</strong>
+        <p>Join the support group or contact 
+BONY KE for assistance.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+
+    <div class="developer">
+
+      <img 
+src="https://files.catbox.moe/ruhh71.jpg">
+
+      <span>DEVELOPER</span>
+
+      <h3>BONY KE</h3>
+
+      <p>
+        Creator and developer of BONY XMD.
+        Building simple and reliable WhatsApp 
+automation tools.
+      </p>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+
+    <div class="final-cta">
+
+      <h2>Ready to connect?</h2>
+
+      <p>
+        Generate your session and bring BONY 
+XMD online.
+      </p>
+
+      <div class="buttons">
+
+        <a
+          class="btn btn-primary"
+          href="https://demon-sension-1.onrender.com"
+          target="_blank">
+          Get Pairing Code
+        </a>
+
+        <a
+          class="btn btn-secondary"
+          href="https://github.com/bonyke2-bot/BONY-XMD-GO-V2"
+          target="_blank">
+          View Repository
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<footer>
+
+  <div class="container footer-content">
+
+    <p>© 2026 BONY XMD. Built by BONY KE.</p>
+
+    <div class="footer-links">
+
+      <a 
+href="https://github.com/bonyke2-bot/BONY-XMD-GO-V2" target="_blank">
+        GitHub
+      </a>
+
+      <a href="https://wa.me/254748339103" 
+target="_blank">
+        WhatsApp
+      </a>
+
+      <a 
+href="https://whatsapp.com/channel/0029Vb8coEnKAwEcRBDDnq0Z"
+        Channel
+      </a>
+
+    </div>
+
+  </div>
+
+</footer><style>
+.feedback-box {
+  max-width: 700px;
+  margin: auto;
+  background: #0b0b0b;
+  border: 1px solid #1b1b1b;
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.feedback-box form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.feedback-box input {
+  flex: 1;
+  min-width: 200px;
+  padding: 14px;
+  background: #050505;
+  color: #fff;
+  border: 1px solid #252525;
+  border-radius: 10px;
+  outline: none;
+}
+
+.feedback-box input:focus {
+  border-color: #555;
+}
+
+#feedbackList {
+  margin-top: 20px;
+}
+
+.feedback-item {
+  padding: 14px 0;
+  border-bottom: 1px solid #1c1c1c;
+}
+
+.feedback-item strong {
+  display: block;
+}
+
+.feedback-item p {
+  color: #888;
+  margin-top: 4px;
+}
+
+.notes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.note {
+  background: #0b0b0b;
+  border: 1px solid #1b1b1b;
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.note strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.note p {
+  color: #777;
+  font-size: 14px;
+}
+
+.developer {
+  max-width: 650px;
+  margin: auto;
+  text-align: center;
+  background: #0b0b0b;
+  border: 1px solid #1b1b1b;
+  border-radius: 22px;
+  padding: 35px 25px;
+}
+
+.developer img {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.developer span {
+  display: block;
+  color: #777;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.developer h3 {
+  font-size: 28px;
+  margin: 5px 0;
+}
+
+.developer p {
+  color: #888;
+  max-width: 500px;
+  margin: auto;
+}
+
+.final-cta {
+  text-align: center;
+  background: #0b0b0b;
+  border: 1px solid #1b1b1b;
+  border-radius: 24px;
+  padding: 45px 20px;
+}
+
+.final-cta h2 {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.final-cta p {
+  color: #777;
+}
+
+footer {
+  border-top: 1px solid #151515;
+  padding: 30px 0;
+  margin-top: 30px;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-content p {
+  color: #666;
+  font-size: 13px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 18px;
+}
+
+.footer-links a {
+  color: #888;
+  font-size: 13px;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+@media (max-width: 800px) {
+  .notes {
+    grid-template-columns: 1fr;
+  }
+
+  .feedback-box form {
+    flex-direction: column;
+  }
+
+  .feedback-box input {
+    width: 100%;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+</style><script>
+const today = new Date().toDateString();
+
+let stats = JSON.parse(
+  localStorage.getItem("bony_xmd_stats") || 
+"{}"
+);
+
+if (stats.date !== today) {
+  stats = {
+    date: today,
+    visitors: 0,
+    linked: 0,
+    failed: 0
+  };
+}
+
+stats.visitors++;
+
+localStorage.setItem(
+  "bony_xmd_stats",
+  JSON.stringify(stats)
+);
+
+document.getElementById("visitors").textContent 
+= stats.visitors;
+document.getElementById("linked").textContent 
+= stats.linked;
+document.getElementById("failed").textContent 
+= stats.failed;
+
+
+const feedbackForm =
+  document.getElementById("feedbackForm");
+
+const feedbackName =
+  document.getElementById("feedbackName");
+
+const feedbackMessage =
+  document.getElementById("feedbackMessage");
+
+const feedbackList =
+  document.getElementById("feedbackList");
+
+
+function displayFeedback() {
+
+  const feedback =
+    JSON.parse(
+      localStorage.getItem("bony_xmd_feedback") 
+|| "[]"
+    );
+
+  feedbackList.innerHTML = "";
+
+  feedback.slice().reverse().forEach(item => {
+
+    const div = document.createElement("div");
+
+    div.className = "feedback-item";
+
+    div.innerHTML = `
+      <strong>${escapeHTML(item.name)}</strong>
+      <p>${escapeHTML(item.message)}</p>
+    `;
+
+    feedbackList.appendChild(div);
+
+  });
+}
+
+
+function escapeHTML(text) {
+
+  const div = document.createElement("div");
+
+  div.textContent = text;
+
+  return div.innerHTML;
+}
+
+
+feedbackForm.addEventListener("submit", 
+function(event) {
+
+  event.preventDefault();
+
+  const feedback =
+    JSON.parse(
+      localStorage.getItem("bony_xmd_feedback") 
+|| "[]"
+    );
+
+  feedback.push({
+    name: feedbackName.value.trim(),
+    message: feedbackMessage.value.trim()
+  });
+
+  localStorage.setItem(
+    "bony_xmd_feedback",
+    JSON.stringify(feedback.slice(-20))
+  );
+
+  feedbackName.value = "";
+  feedbackMessage.value = "";
+
+  displayFeedback();
+
+});
+
+
+displayFeedback();
+
+</script>
+
+</main>
+
+</body>
+</html>
